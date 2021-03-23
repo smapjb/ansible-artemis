@@ -1,8 +1,8 @@
 ---
 # defaults file for artemis
 
-artemis_version: "2.9.0"
-artemis_download_url: "https://www.apache.org/dyn/closer.cgi?filename=activemq/activemq-artemis/{{ artemis_version }}/apache-artemis-{{ artemis_version }}-bin.tar.gz&action=download"
+artemis_version: "7.8.1"
+artemis_download_url: "http://gateway.internal.croftvillas.com/amq-broker-{{ artemis_version }}-bin.zip"
 
 artemis_group:
   name: "artemis"
@@ -17,7 +17,7 @@ artemis_user:
 
 artemis_install_dir: "/opt"
 artemis_log_dir: []
-artemis_home: "{{ artemis_install_dir }}/apache-artemis-{{ artemis_version }}"
+artemis_home: "{{ artemis_install_dir }}/amq-broker-{{ artemis_version }}"
 artemis_home_symlink: "{{ artemis_install_dir }}/artemis"
 
 artemis_brokers:
