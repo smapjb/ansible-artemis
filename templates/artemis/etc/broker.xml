@@ -33,10 +33,10 @@ under the License.
        -->
       <journal-type>{{ _broker.journal_type }}</journal-type>
 {% if 'label_cluster_true' in group_names %}
-      <paging-directory>../sharedstore/paging</paging-directory>
-      <bindings-directory>../sharedstore/bindings</bindings-directory>
-      <journal-directory>../sharedstore/journal</journal-directory>
-      <large-messages-directory>../sharedstore/data/large-messages</large-messages-directory>
+      <paging-directory>./sharedstore/paging</paging-directory>
+      <bindings-directory>./sharedstore/bindings</bindings-directory>
+      <journal-directory>./sharedstore/journal</journal-directory>
+      <large-messages-directory>./sharedstore/data/large-messages</large-messages-directory>
 {% else %}
       <paging-directory>./data/paging</paging-directory>
       <bindings-directory>./data/bindings</bindings-directory>
