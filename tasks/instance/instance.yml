@@ -17,8 +17,9 @@
       jolokia_cors: "{{ broker.jolokia_cors | default(jolokia_cors) }}"
       log_file: "{{ broker.log_file | default(artemis_log_file) }}"
 
+# being more specific here just in case the shared file system is already created
 - name: "Check if {{ _broker.name }} already created"
-  stat: path={{ _broker.path }}/{{ _broker.name }}
+  stat: path={{ _broker.path }}/{{ _broker.name }}/etc
   register: broker_path
 
 - name: "Create broker {{ _broker.name }}"
