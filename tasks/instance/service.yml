@@ -20,7 +20,7 @@
     target: "{{ _broker.path }}/{{ _broker.name }}/bin/artemis-service"
     setype: bin_t
 
-- name: reload SELinux policy to ensure that ts3server is executable
+- name: reload SELinux policy to ensure that artemis-service is executable
   command: restorecon -irv {{ _broker.path }}/{{ _broker.name }}/bin/artemis-service
 
 - name: "Enable service"
