@@ -107,6 +107,23 @@ under the License.
          {% endfor %}
       </acceptors>
 
+{% if 'label_cluster_true' in group_names %}
+      <ha-policy>
+         <shared-store>
+   {% if 'label_amq_master' in group_names %}
+            <master>
+               <failover-on-shutdown>true</failover-on-shutdown>
+            </master>
+   {% elif 'label_amq_slave' in group_names %}
+            <slave>
+               <failover-on-shutdown>true</failover-on-shutdown>
+               <allow-failback>true</allow-failback>
+               <restart-backup>true</restart-backup>
+            </slave>
+   {% endif %}
+         </shared-store>
+      </ha-policy>
+{% endif %}
       <security-settings>
          <security-setting match="#">
             <permission type="createNonDurableQueue" roles="amq"/>
