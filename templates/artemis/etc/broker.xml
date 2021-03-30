@@ -106,7 +106,7 @@ under the License.
       -->
       <connectors>
          <!-- Connector used to be announced through cluster connections and notifications -->
-         <connector name="artemis">tcp://{{ _broker.host }}:{{ artemis_port_artemis }}</connector>
+         <connector name="artemis">tcp://{{ ansible_fqdn }}:{{ artemis_port_artemis }}</connector>
       </connectors>
  
 
@@ -127,7 +127,7 @@ under the License.
             <connector-ref>artemis</connector-ref>
          </broadcast-group>
       </broadcast-groups>
-      
+
       <discovery-groups>
          <discovery-group name="dg-group1">
             <group-address>231.7.7.7</group-address>
