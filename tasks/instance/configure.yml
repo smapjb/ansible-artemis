@@ -3,6 +3,7 @@
   template:
     src: "artemis/etc/broker.xml"
     dest: "{{ _broker.path }}/{{ _broker.name }}/etc/broker.xml"
+    backup: yes
   notify: "restart broker"
 
 - name: "Configure {{ _broker.name }} bootstrap.xml"
