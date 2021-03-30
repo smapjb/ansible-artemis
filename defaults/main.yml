@@ -19,12 +19,14 @@ artemis_install_dir: "/opt"
 artemis_log_dir: []
 artemis_home: "{{ artemis_install_dir }}/amq-broker-{{ artemis_version }}"
 artemis_home_symlink: "{{ artemis_install_dir }}/artemis"
+artemis_shared_store: "./sharedstore"
 
 artemis_brokers:
   - name: "artemis-broker"
     path: "/var/lib"
     user: "admin"
     password: "admin"
+    
 
 artemis_host: "0.0.0.0"
 artemis_port_artemis: 61616
