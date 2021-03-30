@@ -11,11 +11,6 @@
   vars:
     artemis_journal_buffer_timeout: "{{ (xmlresp.matches[0] | dict2items)[0].value }}"
 
-- name: "Override the _broker fact with the calculated journal value"
-  set_fact:
-    _broker:
-      journal_buffer_timeout: "{{ artemis_journal_buffer_timeout }}"
-
 - name: "Configure {{ _broker.name }} broker.xml"
   template:
     src: "artemis/etc/broker.xml"
