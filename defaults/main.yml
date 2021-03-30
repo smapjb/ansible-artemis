@@ -39,7 +39,7 @@ artemis_journal_type: "NIO"
 artemis_journal_pool_files: 10
 artemis_journal_buffer_timeouts:
   NIO: "3333333"
-  ASYNCIO: "500000"
+  ASYNCIO: "96000"
 artemis_journal_buffer_timeout: "{{ artemis_journal_buffer_timeouts[artemis_journal_type] }}"
 
 artemis_acceptors:

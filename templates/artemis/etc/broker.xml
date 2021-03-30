@@ -73,11 +73,18 @@ under the License.
 
       <!--
        This value was determined through a calculation.
-       Your system could perform 1 writes per millisecond
+       Your system could perform 10.42 writes per millisecond
        on the current journal configuration.
-       That translates as a sync write every 1000000 nanoseconds
+       That translates as a sync write every 96000 nanoseconds.
+
+       Note: If you specify 0 the system will perform writes directly to the disk.
+             We recommend this to be 0 if you are using journalType=MAPPED and journal-datasync=false.
       -->
       <journal-buffer-timeout>{{ _broker.journal_buffer_timeout }}</journal-buffer-timeout>
+      <!--
+        When using ASYNCIO, this will determine the writing queue depth for libaio.
+       -->
+      <journal-max-io>4096</journal-max-io>
       <!-- how often we are looking for how many bytes are being used on the disk in ms -->
       <disk-scan-period>5000</disk-scan-period>
       <!-- once the disk hits this limit the system will block, or close the connection in certain protocols
