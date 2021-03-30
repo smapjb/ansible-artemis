@@ -104,11 +104,12 @@ under the License.
             <global-max-size>100Mb</global-max-size>
 
       -->
+      <!-- Connector used to be announced through cluster connections and notifications -->
       <connectors>
-         <!-- Connector used to be announced through cluster connections and notifications -->
-         <connector name="artemis">tcp://{{ ansible_fqdn }}:{{ artemis_port_artemis }}</connector>
+      {% for node in groups['label_cluster_true']|default([]) %}
+        <connector name="{{ hostvars[node].inventory_hostname_short }}">tcp://{{ hostvars[node].inventory_hostname }}:{{ artemis_port_artemis }}</connector>
+      {% endfor %}
       </connectors>
- 
 
       <acceptors>
          <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
@@ -119,29 +120,18 @@ under the License.
          {% endfor %}
       </acceptors>
 
-      <broadcast-groups>
-         <broadcast-group name="bg-group1">
-            <group-address>231.7.7.7</group-address>
-            <group-port>9876</group-port>
-            <broadcast-period>5000</broadcast-period>
-            <connector-ref>artemis</connector-ref>
-         </broadcast-group>
-      </broadcast-groups>
-
-      <discovery-groups>
-         <discovery-group name="dg-group1">
-            <group-address>231.7.7.7</group-address>
-            <group-port>9876</group-port>
-            <refresh-timeout>10000</refresh-timeout>
-         </discovery-group>
-      </discovery-groups>
-
       <cluster-connections>
          <cluster-connection name="my-cluster">
-            <connector-ref>artemis</connector-ref>
+            <connector-ref>{{ inventory_hostname_short }}</connector-ref>
             <message-load-balancing>OFF</message-load-balancing>
             <max-hops>0</max-hops>
-            <discovery-group-ref discovery-group-name="dg-group1"/>
+            <static-connectors>
+            {% for node in groups['label_cluster_true']|default([]) %}
+              {% if inventory_hostname_short != hostvars[node].inventory_hostname_short %}
+                <connector-ref>{{ hostvars[node].inventory_hostname_short }}</connector-ref>
+              {% endif %}
+            {% endfor %}
+            </static-connectors>
          </cluster-connection>
       </cluster-connections>
 
