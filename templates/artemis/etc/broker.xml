@@ -104,6 +104,11 @@ under the License.
             <global-max-size>100Mb</global-max-size>
 
       -->
+      <connectors>
+         <!-- Connector used to be announced through cluster connections and notifications -->
+         <connector name="artemis">tcp://{{ _broker.host }}:{{ artemis_port_artemis }}</connector>
+      </connectors>
+ 
 
       <acceptors>
          <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
@@ -114,6 +119,15 @@ under the License.
          {% endfor %}
       </acceptors>
 
+      <broadcast-groups>
+         <broadcast-group name="bg-group1">
+            <group-address>231.7.7.7</group-address>
+            <group-port>9876</group-port>
+            <broadcast-period>5000</broadcast-period>
+            <connector-ref>artemis</connector-ref>
+         </broadcast-group>
+      </broadcast-groups>
+      
       <discovery-groups>
          <discovery-group name="dg-group1">
             <group-address>231.7.7.7</group-address>
