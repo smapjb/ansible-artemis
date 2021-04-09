@@ -105,11 +105,13 @@ under the License.
 
       -->
       <!-- Connector used to be announced through cluster connections and notifications -->
+   {% if 'label_cluster_true' in group_names %}
       <connectors>
       {% for node in groups['label_cluster_true']|default([]) %}
         <connector name="{{ hostvars[node].inventory_hostname_short }}">tcp://{{ hostvars[node].inventory_hostname }}:{{ artemis_port_artemis }}</connector>
       {% endfor %}
       </connectors>
+   {% endif %}
 
       <acceptors>
          <!-- useEpoll means: it will use Netty epoll if you are on a system (Linux) that supports it -->
