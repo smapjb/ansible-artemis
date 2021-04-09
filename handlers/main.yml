@@ -3,3 +3,4 @@
   service:
     name: "{{ _broker.name }}"
     state: restarted
+  throttle: 1
